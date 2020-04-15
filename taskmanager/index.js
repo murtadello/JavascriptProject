@@ -1,64 +1,55 @@
-//Select all Element By ID
-var checkEverySecond;
-
-var timers = [];
-var currentTimerIndex = 0;
-
-function getTimerObject(){
-  return {
-    hour:0,
-    minute:0,
-    second:0,
-    text:'',
-    id:0
-  
-  }
-}
-function getValue() {
-  //Selecting the element
+function addTask(){
   var txtValue = document.getElementById("txt").value; //it take the value of input field
-  var listTask = document.createTextNode(txtValue); //it creates a text node
-  //get the value fo num input field
+  var listTask = document.createTextNode(txtValue);
+
   var numValue = document.getElementById("num").value;
   var secondValue = document.createTextNode(numValue);
-  ///Select the radio button and inputHour
-  ///Create Elements
+
+  var hourValue = document.getElementById("timehour").value;
+  var hourValueInput = document.createTextNode(hourValue);
+
   var newList = document.createElement("li"); //create a list node
   var buttonItem = document.createElement("input"); //create a button node
   var timeSecond = document.createElement("p");
   buttonItem.type = "button"; //it defines the type of input field , that its type butt
-  buttonItem.value = "Delete"; //it define the value of the button
-  //append li and button to the node
-  newList.append(listTask); //add task to to the list
-  timeSecond.append(secondValue);
+  buttonItem.value = "Delete"; 
+  newList.append(listTask);
+   //add task to to the list
+  if(numValue.checked){
+    timeSecond.append(secondValue);
+  }else{
+    timeSecond.append(hourValueInput);
+  }
   newList.append(timeSecond);
-  newList.append(buttonItem);
-
-  //add button to the list
+  newList.append(buttonItem)
   //append li and button to the unorder list
   document.getElementById("taskList").appendChild(newList);
-  //add an event listener to the button delete
-  buttonItem.addEventListener("click", function() {
-    newList.remove();
-  });
-  //set the an interval to the time
-  var countTimer = setInterval(function() {
-    numValue--;
-    if (numValue <= 0) {
-      timeSecond.innerHTML = "Finished";
-      if (numValue == 0) {
-        showNotification();
-        timeSecond.style.color ="yellow";
-        newList.style.backgroundColor ="#3772ff";
-        newList.style.borderRadius = "5px";
-        newList.style.padding = "5px";
-      }
-    } else {
-      timeSecond.innerHTML = numValue + " seconds remaining";
+  eventListenerDeleteButton();
+}
+//Set counter for the Second 
+var countTimer = setInterval(function() {
+  numValue--;
+  if (numValue <= 0) {
+    timeSecond.innerHTML = "Finished";
+    if (numValue == 0) {
+      showNotification();
+      timeSecond.style.color ="yellow";
+      newList.style.backgroundColor ="#3772ff";
+      newList.style.borderRadius = "5px";
+      newList.style.padding = "5px";
     }
-  
-  }, 1000);
-} //end of getvalue funciton
+  } else {
+    timeSecond.innerHTML = numValue + " seconds remaining";
+  }
+
+}, 1000);
+
+//EventListener Function For button Delete
+function eventListenerDeleteButton(){
+  buttonItem.addEventListener('click', function(){
+    newList.remove();
+  })
+}
 window.addEventListener(
   "keypress",
   function(e) {
@@ -84,36 +75,7 @@ function hourcheck() {
   }
 }
 ///Function for Hour input field
-function addTask() {
-  //get the value of input field
-  var txtValue = document.getElementById("txt").value;
-  var listTask = document.createTextNode(txtValue);
 
-  //get the value hour field
-  var hourValue = document.getElementById("timehour").value;
-  var hourValueInput = document.createTextNode(hourValue);
-  //create Element
-  var newList = document.createElement("li"); //create a list node
-  var buttonItem = document.createElement("input"); //create a button node
-  var timeHour = document.createElement("p");
-  buttonItem.type = "button"; //it defines the type of input field , that its type butt
-  buttonItem.value = "Delete";
-
-  //append to the list
-  newList.append(listTask);
-  timeHour.append(hourValueInput);
-  newList.append(timeHour);
-  newList.append(buttonItem);
-  //add list to unorder list
-  document.getElementById("taskList").appendChild(newList);
-  // Delete button click event
-  buttonItem.addEventListener("click", function() {
-    newList.remove();
-  });
-
-//this is the end of gethour
-
-} 
 //end of the getHour Function
 function showNotification() {
   var txtValue = document.getElementById("txt").value;
@@ -122,6 +84,7 @@ function showNotification() {
     icon: "done.jpg"
   });
 }
+//Function For checking the time of the task with current time
 function verifyTime(){
   var hourValue = document.getElementById("timehour").value;
   const hourTime = new Date();
@@ -139,18 +102,11 @@ function verifyTime(){
   }
 }
 function finalTime() {
-  if (document.getElementById("hour").checked == true) {
-    // timers[currentTimerIndex] = getTimerObject();
-    addTask();
-
+  addTask();
     checkEverySecond = setInterval(() => {
       verifyTime();
     }, 1000);
     // timers[currentTimerIndex].id = checkEverySecond;
-  } else {
-    getValue();
-  }
-
 }
 
 
