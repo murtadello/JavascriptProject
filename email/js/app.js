@@ -72,7 +72,6 @@ function validateField(){
         if(errors.length === 0){
             sendBtn.disabled = false;
         }
-
     }
 }
 //validate the lenght of the fields
@@ -100,7 +99,6 @@ function validateEmail(field){
         field.classList.add('error');
     }
 }
-
 
 //Reset the Form
 

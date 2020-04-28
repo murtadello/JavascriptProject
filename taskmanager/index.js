@@ -1,5 +1,4 @@
 //Select all Element By ID
-
 function getValue() {
   //Selecting the element
   var txtValue = document.getElementById("txt").value; //it take the value of input field
