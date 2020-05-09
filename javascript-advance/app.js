@@ -152,30 +152,30 @@ if(name1 === name2){
 /// Object Create
 
 
-const Client = {
-    getBalance: function(){
-        return `hello ${this.name} your balance is ${this.balance}`
-    },
-    withdraw: function(amount){
-        return this.balance -= amount;
-    }
+// const Client = {
+//     getBalance: function(){
+//         return `hello ${this.name} your balance is ${this.balance}`
+//     },
+//     withdraw: function(amount){
+//         return this.balance -= amount;
+//     }
 
-}
-
-
-// create a new Object and give a balance
-const mary = Object.create(Client);
+// }
 
 
-// Attach the properties
+// // create a new Object and give a balance
+// const mary = Object.create(Client);
 
 
-mary.name = 'Maryam';
-mary.balance = 1000;
+// // Attach the properties
 
 
-console.log(mary);
-console.log(mary.getBalance());
+// mary.name = 'Maryam';
+// mary.balance = 1000;
+
+
+// console.log(mary);
+// console.log(mary.getBalance());
 
 
 
